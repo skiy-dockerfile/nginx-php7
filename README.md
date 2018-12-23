@@ -42,6 +42,7 @@ docker run -d --name=nginx \
 -p 80:80 -p 443:443 \
 -v your_crt_key_files_folder:/usr/local/nginx/conf/ssl \
 -e PROXY_WEB=On \
+-e WEB_HTTPS=ON \
 -e PROXY_CRT=your_crt_name \
 -e PROXY_KEY=your_key_name \
 -e PROXY_DOMAIN=your_domain \
@@ -72,7 +73,7 @@ cd /home/extension/mongodb-1.4.2 && \
 make && make install
 ```
 
-[中文README](README_CN.md)
+[中文介绍](README_CN.md)
 
 ## [ChangeLog](changelogs.md)
 
