@@ -76,8 +76,8 @@ server {
 
         set \$real_script_name \$fastcgi_script_name;
         if (\$fastcgi_script_name ~ "^(.+?\.php)(/.+)$") {
-                set $real_script_name $1;
-                set $path_info $2;
+                set \$real_script_name \$1;
+                set \$path_info \$2;
         }
         fastcgi_param SCRIPT_FILENAME \$document_root\$real_script_name;
         fastcgi_param SCRIPT_NAME \$real_script_name;
@@ -101,7 +101,7 @@ server {
 EOF
 
     # USAGE HTTPS
-    if [[ "$WEB_HTTPS" == "ON" ]]; then
+    if [[ -n "$WEB_HTTPS" ]] && [[ "$WEB_HTTPS" -eq "ON" ]]; then
 
         [ -f "${Nginx_Install_Dir}/conf/ssl" ] || mkdir -p $Nginx_Install_Dir/conf/ssl
 
@@ -165,8 +165,8 @@ server {
 
         set \$real_script_name \$fastcgi_script_name;
         if (\$fastcgi_script_name ~ "^(.+?\.php)(/.+)$") {
-                set $real_script_name $1;
-                set $path_info $2;
+                set \$real_script_name \$1;
+                set \$path_info \$2;
         }
         fastcgi_param SCRIPT_FILENAME \$document_root\$real_script_name;
         fastcgi_param SCRIPT_NAME \$real_script_name;
