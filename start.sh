@@ -101,7 +101,7 @@ server {
 EOF
 
     # USAGE HTTPS
-    if [[ -n "$WEB_HTTPS" ]] && [[ "$WEB_HTTPS" -eq "ON" ]]; then
+    if [[ "$WEB_HTTPS" -eq "ON" ]]; then
 
         [ -f "${Nginx_Install_Dir}/conf/ssl" ] || mkdir -p $Nginx_Install_Dir/conf/ssl
 
