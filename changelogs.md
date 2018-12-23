@@ -1,3 +1,7 @@
+**v2.13.0**   
+updated nginx to version 1.15.7
+updated php to version 7.2.13
+
 **v2.10.0**   
 updated nginx to version 1.15.4
 updated php to version 7.2.10
