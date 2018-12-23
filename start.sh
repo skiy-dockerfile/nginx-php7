@@ -72,17 +72,16 @@ server {
         root           /data/www;
         fastcgi_pass   127.0.0.1:9000;
         fastcgi_index  index.php;
-        fastcgi_param  SCRIPT_FILENAME  /\$document_root\$fastcgi_script_name;
-        include        fastcgi_params;
+        include        fastcgi.conf;
 
-        set $real_script_name $fastcgi_script_name;
-        if ($fastcgi_script_name ~ "^(.+?\.php)(/.+)$") {
+        set \$real_script_name \$fastcgi_script_name;
+        if (\$fastcgi_script_name ~ "^(.+?\.php)(/.+)$") {
                 set $real_script_name $1;
                 set $path_info $2;
         }
-        fastcgi_param SCRIPT_FILENAME $document_root$real_script_name;
-        fastcgi_param SCRIPT_NAME $real_script_name;
-        fastcgi_param PATH_INFO $path_info;       
+        fastcgi_param SCRIPT_FILENAME \$document_root\$real_script_name;
+        fastcgi_param SCRIPT_NAME \$real_script_name;
+        fastcgi_param PATH_INFO \$path_info;       
     }
 
     location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|ico)$ {
@@ -102,7 +101,7 @@ server {
 EOF
 
     # USAGE HTTPS
-    if [[ -n "$WEB_HTTPS" ]] && [[ "$WEB_HTTPS" -eq "ON" ]]; then
+    if [[ "$WEB_HTTPS" -eq "ON" ]]; then
 
         [ -f "${Nginx_Install_Dir}/conf/ssl" ] || mkdir -p $Nginx_Install_Dir/conf/ssl
 
@@ -162,17 +161,16 @@ server {
         root           /data/www;
         fastcgi_pass   127.0.0.1:9000;
         fastcgi_index  index.php;
-        fastcgi_param  SCRIPT_FILENAME  /\$document_root\$fastcgi_script_name;
-        include        fastcgi_params;
+        include        fastcgi.conf;
 
-        set $real_script_name $fastcgi_script_name;
-        if ($fastcgi_script_name ~ "^(.+?\.php)(/.+)$") {
+        set \$real_script_name \$fastcgi_script_name;
+        if (\$fastcgi_script_name ~ "^(.+?\.php)(/.+)$") {
                 set $real_script_name $1;
                 set $path_info $2;
         }
-        fastcgi_param SCRIPT_FILENAME $document_root$real_script_name;
-        fastcgi_param SCRIPT_NAME $real_script_name;
-        fastcgi_param PATH_INFO $path_info;       
+        fastcgi_param SCRIPT_FILENAME \$document_root\$real_script_name;
+        fastcgi_param SCRIPT_NAME \$real_script_name;
+        fastcgi_param PATH_INFO \$path_info;        
     }
 
     location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|ico)$ {
