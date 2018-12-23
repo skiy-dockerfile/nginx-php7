@@ -48,7 +48,6 @@ chown -R www.www $DATA_DIR
 
 if [[ -n "$PROXY_WEB" ]]; then
 
-    [ -f "${Nginx_Install_Dir}/conf/ssl" ] || mkdir -p $Nginx_Install_Dir/conf/ssl
     [ -f "${Nginx_Install_Dir}/conf/vhost" ] || mkdir -p $Nginx_Install_Dir/conf/vhost
 
     if [ -z "$PROXY_DOMAIN" ]; then
@@ -57,31 +56,80 @@ if [[ -n "$PROXY_WEB" ]]; then
             exit 1
     fi
 
-    if [ -z "$PROXY_CRT" ]; then
-         echo >&2 'error:  missing PROXY_CRT'
-         echo >&2 '  Did you forget to add -e PROXY_CRT=... ?'
-         exit 1
-     fi
-
-     if [ -z "$PROXY_KEY" ]; then
-             echo >&2 'error:  missing PROXY_KEY'
-             echo >&2 '  Did you forget to add -e PROXY_KEY=... ?'
-             exit 1
-     fi
-
-     if [ ! -f "${Nginx_Install_Dir}/conf/ssl/${PROXY_CRT}" ]; then
-             echo >&2 'error:  missing PROXY_CRT'
-             echo >&2 "  You need to put ${PROXY_CRT} in ssl directory"
-             exit 1
-     fi
-
-     if [ ! -f "${Nginx_Install_Dir}/conf/ssl/${PROXY_KEY}" ]; then
-             echo >&2 'error:  missing PROXY_CSR'
-             echo >&2 "  You need to put ${PROXY_KEY} in ssl directory"
-             exit 1
-     fi
-
     cat > ${Nginx_Install_Dir}/conf/vhost/website.conf << EOF
+server {
+    listen 80;
+    server_name $PROXY_DOMAIN;
+
+    root   $DATA_DIR;
+    index  index.php index.html index.htm;
+
+    location / {
+        try_files \$uri \$uri/ /index.php?\$args;
+    }
+
+    location ~ \.php$ {
+        root           /data/www;
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        include        fastcgi.conf;
+
+        set \$real_script_name \$fastcgi_script_name;
+        if (\$fastcgi_script_name ~ "^(.+?\.php)(/.+)$") {
+                set \$real_script_name \$1;
+                set \$path_info \$2;
+        }
+        fastcgi_param SCRIPT_FILENAME \$document_root\$real_script_name;
+        fastcgi_param SCRIPT_NAME \$real_script_name;
+        fastcgi_param PATH_INFO \$path_info;       
+    }
+
+    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|ico)$ {
+        expires 30d;
+        access_log off;
+    }
+
+    location ~ .*\.(js|css)?$ {
+        expires 7d;
+        access_log off;
+    }
+
+    location ~ /\.(ht|git|vscode|idea) {
+        deny all;
+    }
+}
+EOF
+
+    # USAGE HTTPS
+    if [[ "$WEB_HTTPS" == "ON" ]]; then
+
+        [ -f "${Nginx_Install_Dir}/conf/ssl" ] || mkdir -p $Nginx_Install_Dir/conf/ssl
+
+        if [ -z "$PROXY_CRT" ]; then
+            echo >&2 'error:  missing PROXY_CRT'
+            echo >&2 '  Did you forget to add -e PROXY_CRT=... ?'
+            exit 1
+        fi
+
+        if [ -z "$PROXY_KEY" ]; then
+                echo >&2 'error:  missing PROXY_KEY'
+                echo >&2 '  Did you forget to add -e PROXY_KEY=... ?'
+                exit 1
+        fi
+
+        if [ ! -f "${Nginx_Install_Dir}/conf/ssl/${PROXY_CRT}" ]; then
+                echo >&2 'error:  missing PROXY_CRT'
+                echo >&2 "  You need to put ${PROXY_CRT} in ssl directory"
+                exit 1
+        fi
+
+        if [ ! -f "${Nginx_Install_Dir}/conf/ssl/${PROXY_KEY}" ]; then
+                echo >&2 'error:  missing PROXY_CSR'
+                echo >&2 "  You need to put ${PROXY_KEY} in ssl directory"
+                exit 1
+        fi
+
+        cat > ${Nginx_Install_Dir}/conf/vhost/website.conf << EOF
 server {
     listen 80;
     server_name $PROXY_DOMAIN;
@@ -113,11 +161,34 @@ server {
         root           /data/www;
         fastcgi_pass   127.0.0.1:9000;
         fastcgi_index  index.php;
-        fastcgi_param  SCRIPT_FILENAME  /\$document_root\$fastcgi_script_name;
-        include        fastcgi_params;
+        include        fastcgi.conf;
+
+        set \$real_script_name \$fastcgi_script_name;
+        if (\$fastcgi_script_name ~ "^(.+?\.php)(/.+)$") {
+                set \$real_script_name \$1;
+                set \$path_info \$2;
+        }
+        fastcgi_param SCRIPT_FILENAME \$document_root\$real_script_name;
+        fastcgi_param SCRIPT_NAME \$real_script_name;
+        fastcgi_param PATH_INFO \$path_info;        
+    }
+
+    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|ico)$ {
+        expires 30d;
+        access_log off;
+    }
+
+    location ~ .*\.(js|css)?$ {
+        expires 7d;
+        access_log off;
+    }
+
+    location ~ /\.(ht|git|vscode|idea) {
+        deny all;
     }
 }
 EOF
+    fi
 fi
 
 /usr/bin/supervisord -n -c /etc/supervisord.conf
