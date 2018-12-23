@@ -7,7 +7,7 @@ php:   **7.2.13**
 ## Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)   
 
-**[Example](https://github.com/skiy-dockerfile/nginx-php7/wiki/Example)**
+**[Example](https://github.com/skiy/nginx-php7/wiki/Example)**
    
 ## Installation
 Pull the image from the docker index rather than downloading the git repo. This prevents you having to build the image on every docker host.

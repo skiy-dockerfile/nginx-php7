@@ -7,7 +7,7 @@ php:   **7.2.13**
 ## Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)  
 
-**[Example](https://github.com/skiy-dockerfile/nginx-php7/wiki/Example)** 
+**[Example](https://github.com/skiy/nginx-php7/wiki/Example)** 
    
 ## 安装使用
 从 Docker 拉取镜像
