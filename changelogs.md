@@ -1,17 +1,27 @@
+**v2.17.1**    
+updated nginx to version 1.15.11   
+
+**v2.17.0**    
+updated php to version 7.2.17  
+
+**v2.16.0**   
+updated nginx to version 1.15.10      
+updated php to version 7.2.16  
+
 **v2.15.0**   
-updated nginx to version 1.15.9
-updated php to version 7.2.15
+updated nginx to version 1.15.9   
+updated php to version 7.2.15   
 
 **v2.13.0**   
-updated nginx to version 1.15.7
-updated php to version 7.2.13
+updated nginx to version 1.15.7   
+updated php to version 7.2.13   
 
 **v2.10.0**   
-updated nginx to version 1.15.4
-updated php to version 7.2.10
+updated nginx to version 1.15.4   
+updated php to version 7.2.10   
 
 **v2.9.1**   
-updated nginx to version 1.15.3
+updated nginx to version 1.15.3   
 
 **v2.9.0**   
 updated php to version 7.2.9 
