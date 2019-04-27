@@ -1,3 +1,6 @@
+**v2.17.2**    
+updated nginx to version 1.15.12   
+
 **v2.17.1**    
 updated nginx to version 1.15.11   
 
