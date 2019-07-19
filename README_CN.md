@@ -1,8 +1,8 @@
 Nginx and PHP for Docker
 
 ## 最新版本
-nginx: **1.17.0**   
-php:   **7.2.19**
+nginx: **1.17.1**   
+php:   **7.2.20**
 
 ## Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)  
