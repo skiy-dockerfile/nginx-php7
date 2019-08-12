@@ -70,8 +70,6 @@ cd /home/extension/mongodb-1.4.2 && \
 make && make install
 ```
 
-[ENGLISH](README.md)
-
 ## [更新日志](changelogs.md) 
 
 ## 作者
