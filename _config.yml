@@ -3,15 +3,12 @@ title: nginx-php7
 description: Nginx PHP7 for Docker
 encoding: UTF-8
 highlighter: rouge
-name: Skiychan
 
 author:
 github: skiy
 
 copyright:
-year:       2018-2019
-name:       Skiychan
+year: 2018-2019
+name: Skiychan
 
-url: https://skiy.github.io/nginx-php7
-
-timezone:     Asia/Shanghai
+timezone: Asia/Shanghai
