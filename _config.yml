@@ -1,9 +1,5 @@
 theme: jekyll-theme-cayman
 title: nginx-php7
 description: Nginx PHP7 for Docker
-author: Skiychan
-name: skiy
-email: skiychan@outlook.com
-github: skiy
 encoding: UTF-8
 highlighter: rouge
