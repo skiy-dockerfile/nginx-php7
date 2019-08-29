@@ -1,8 +1,3 @@
-## nginx-php7
-------
-Nginx PHP7 for Docker   
-
-
 ### 正常启动，使用默认的 ```index.php``` 文件
 ```sh
 docker run --name nginx -p 38080:80 -d skiychan/nginx-php7
