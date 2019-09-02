@@ -1,5 +1,7 @@
 **v2.22.0**    
 updated php to version 7.2.22   
+remove supervisord   
+code viewer   
 
 **v2.21.1**    
 updated nginx to version 1.17.3  

@@ -142,7 +142,7 @@ chown -R www:www ${NGX_WWW_ROOT}
 
 RUN cd ${PRO_SERVER_PATH} && ln -s /usr/local/nginx/conf nginx
 
-VOLUME ${NGX_WWW_ROOT}, ${PHP_EXTENSION_INI_PATH}, ${PHP_EXTENSION_SH_PATH}, ${PRO_SERVER_PATH}/nginx
+VOLUME ["/data/wwwroot", "/data/wwwlogs", "/data/server/php/ini", "/data/server/php/extension", "/data/server/nginx"]
 
 # NGINX
 ADD nginx.conf /usr/local/nginx/conf/
@@ -157,8 +157,8 @@ RUN chmod +x /entrypoint.sh
 # Set port
 EXPOSE 80 443
 
-CMD ["/usr/local/php/sbin/php-fpm","-F","daemon off;"]
-# CMD ["/usr/local/nginx/sbin/nginx","-g","daemon off;"]
+# CMD ["/usr/local/php/sbin/php-fpm", "-F", "daemon off;"]
+# CMD ["/usr/local/nginx/sbin/nginx", "-g", "daemon off;"]
 
 # Start it
 ENTRYPOINT ["/entrypoint.sh"]

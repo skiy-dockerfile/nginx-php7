@@ -10,6 +10,13 @@ php:   **7.2.22**
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)  
 
 **[Example](https://github.com/skiy/nginx-php7/wiki/Example)** 
+
+## 构建
+```sh
+git pull origin https://github.com/skiy/nginx-php7.git
+cd nginx-php7
+docker build -t nginx-php7 .
+```
    
 ## 安装使用
 从 Docker 拉取镜像
@@ -34,18 +41,15 @@ docker run --name nginx -p 8080:80 -d skiychan/nginx-php7
 ```sh
 docker run --name nginx -p 8080:80 -v /your_code_directory:/data/www -d skiychan/nginx-php7
 ```
-
-## 让网站支持 HTTPS
-```sh
-docker run -d --name=nginx \
--p 80:80 -p 443:443 \
--v your_crt_key_files_folder:/usr/local/nginx/conf/ssl \
--e PROXY_WEB=On \
--e WEB_HTTPS=ON \
--e PROXY_CRT=your_crt_name \
--e PROXY_KEY=your_key_name \
--e PROXY_DOMAIN=your_domain \
-skiychan/nginx-php7
+**更多**
+```
+docker run --name nginx -p 8080:80 \
+-v /your_code_directory:/data/wwwroot \
+-v /your_nginx_log_path:/data/wwwlogs \
+-v /your_nginx_conf_path:/data/server/nginx \
+-v /your_php_extension_ini:/data/server/php/ini \
+-v /your_php_extension_file:/data/server/php/extension \
+-d skiychan/nginx-php7
 ```
 
 ## 添加 PHP 扩展
@@ -53,15 +57,15 @@ skiychan/nginx-php7
 ```sh
 docker run --name nginx \
 -p 8080:80 -d \
--v /your_php_extension_ini:/data/phpextini \
--v /your_php_extension_file:/data/phpextfile \
+-v /your_php_extension_ini:/data/server/php/ini \
+-v /your_php_extension_file:/data/server/php/extension \
 skiychan/nginx-php7
 ```
-```extini/ext-xxx.ini``` 文件中的内容为
+```/your_php_extension_ini/ext-xxx.ini``` 文件中的内容为
 ```
 extension=mongodb.so
 ```
-扩展编译代码基本编写内容如下，详情请查看```extfile/extension.sh```文件：
+扩展编译代码基本编写内容如下，详情请查看```/your_php_extension_file/extension.sh```文件：
 ```
 curl -Lk https://pecl.php.net/get/mongodb-1.4.2.tgz | gunzip | tar x -C /home/extension && \
 cd /home/extension/mongodb-1.4.2 && \

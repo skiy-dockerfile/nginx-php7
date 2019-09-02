@@ -13,11 +13,8 @@ if [ -f "${PHP_EXTENSION_SH_PATH}/extension.sh" ]; then
     # mv -rf ${PHP_EXTENSION_SH_PATH}/extension.sh ${PHP_EXTENSION_SH_PATH}/extension_back.sh
 fi
 
-
-echo "RUN"
-echo ${PHP_EXTENSION_SH_PATH}
-
 # /usr/local/php/sbin/php-fpm -F
+/usr/local/php/sbin/php-fpm -D
 
 # /usr/local/nginx/sbin/nginx -g
 /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf

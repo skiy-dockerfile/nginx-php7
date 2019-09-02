@@ -15,7 +15,7 @@ php:   **7.2.22**
 ```sh
 git pull origin https://github.com/skiy/nginx-php7.git
 cd nginx-php7
-
+docker build -t nginx-php7 .
 ```
    
 ## Installation
@@ -42,20 +42,18 @@ You can then browse to ```http://\<docker_host\>:8080``` to view the default ins
 If you want to link to your web site directory on the docker host to the container run:
 
 ```sh
-docker run --name nginx -p 8080:80 -v /your_code_directory:/data/www -d skiychan/nginx-php7
+docker run --name nginx -p 8080:80 -v /your_code_directory:/data/wwwroot -d skiychan/nginx-php7
 ```
 
-## Enabling SSL
-```sh
-docker run -d --name=nginx \
--p 80:80 -p 443:443 \
--v your_crt_key_files_folder:/usr/local/nginx/conf/ssl \
--e PROXY_WEB=On \
--e WEB_HTTPS=ON \
--e PROXY_CRT=your_crt_name \
--e PROXY_KEY=your_key_name \
--e PROXY_DOMAIN=your_domain \
-skiychan/nginx-php7
+**More**
+```
+docker run --name nginx -p 8080:80 \
+-v /your_code_directory:/data/wwwroot \
+-v /your_nginx_log_path:/data/wwwlogs \
+-v /your_nginx_conf_path:/data/server/nginx \
+-v /your_php_extension_ini:/data/server/php/ini \
+-v /your_php_extension_file:/data/server/php/extension \
+-d skiychan/nginx-php7
 ```
 
 ## Enabling Extensions With Source
@@ -63,17 +61,17 @@ add **ext-xxx.ini** to folder ```/your_php_extension_ini```, source ```/your_php
 ```sh
 docker run --name nginx \
 -p 8080:80 -d \
--v /your_php_extension_ini:/data/phpextini \
--v /your_php_extension_file:/data/phpextfile \
+-v /your_php_extension_ini:/data/server/php/ini \
+-v /your_php_extension_file:/data/server/php/extension \
 skiychan/nginx-php7
 ```
 
-```extini/ext-xxx.ini``` file content:
+```/your_php_extension_ini/ext-xxx.ini``` file content:
 ```
 extension=mongodb.so
 ```
 
-```extfile/extension.sh```: 
+```/your_php_extension_file/extension.sh```: 
 ```  
 curl -Lk https://pecl.php.net/get/mongodb-1.4.2.tgz | gunzip | tar x -C /home/extension && \
 cd /home/extension/mongodb-1.4.2 && \
