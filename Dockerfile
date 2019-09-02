@@ -142,7 +142,7 @@ chown -R www:www ${NGX_WWW_ROOT}
 
 RUN cd ${PRO_SERVER_PATH} && ln -s /usr/local/nginx/conf nginx
 
-VOLUME [${NGX_WWW_ROOT}, ${PHP_EXTENSION_INI_PATH}, ${PHP_EXTENSION_SH_PATH}, ${PRO_SERVER_PATH}/nginx]
+VOLUME ${NGX_WWW_ROOT}, ${PHP_EXTENSION_INI_PATH}, ${PHP_EXTENSION_SH_PATH}, ${PRO_SERVER_PATH}/nginx
 
 # NGINX
 ADD nginx.conf /usr/local/nginx/conf/
