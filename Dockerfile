@@ -10,6 +10,10 @@ ENV NGX_LOG_ROOT=/data/wwwlogs
 ENV PHP_EXTENSION_SH_PATH=/data/server/php/extension
 ENV PHP_EXTENSION_INI_PATH=/data/server/php/ini
 
+## mkdir folders
+RUN mkdir -p /data/{wwwroot,wwwlogs,server/php/ini,server/php/extension,}
+
+## install libraries
 RUN set -x && \
 yum install -y gcc \
 gcc-c++ \
@@ -19,7 +23,7 @@ libtool \
 make \
 cmake \
 #
-# Install PHP library
+# install PHP libraries
 ## libmcrypt-devel DIY
 # rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm && \
 zlib \
@@ -36,14 +40,12 @@ libjpeg-devel \
 freetype-devel \
 libmcrypt-devel \
 openssh-server \
-python-setuptools
-
-# Download nginx & php
-RUN mkdir -p /data/{wwwroot,wwwlogs,server/php/ini,server/php/extension,} && \
-mkdir -p /home/nginx-php
-
-# Make install nginx
-RUN curl -Lk https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+python-setuptools && \
+#
+# make temp folder
+mkdir -p /home/nginx-php && \
+# install nginx
+curl -Lk https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
 cd /home/nginx-php/nginx-$NGINX_VERSION && \
 ./configure --prefix=/usr/local/nginx \
 --user=www --group=www \
@@ -57,8 +59,12 @@ cd /home/nginx-php/nginx-$NGINX_VERSION && \
 --without-mail_imap_module \
 --with-http_gzip_static_module && \
 make && make install && \
+# add user
+useradd -r -s /sbin/nologin -d ${NGX_WWW_ROOT} -m -k no www && \
+# ln nginx
+cd ${PRO_SERVER_PATH} && ln -s /usr/local/nginx/conf nginx && \
 #
-# Make install php
+# install php
 curl -Lk https://php.net/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
 cd /home/nginx-php/php-$PHP_VERSION && \  
 ./configure --prefix=/usr/local/php \
@@ -101,23 +107,19 @@ cd /home/nginx-php/php-$PHP_VERSION && \
 --disable-debug \
 --without-pear && \
 --enable-zip --without-libzip && \
-make && make install
-
-# Install php-fpm
-RUN cd /home/nginx-php/php-$PHP_VERSION && \
+make && make install && \
+#
+# install php-fpm
+cd /home/nginx-php/php-$PHP_VERSION && \
 cp php.ini-production /usr/local/php/etc/php.ini && \
 cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf && \
 cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf && \
+#
+# remove temp folder
 rm -rf /home/nginx-php && \
 #
-# Add user
-useradd -r -s /sbin/nologin -d ${NGX_WWW_ROOT} -m -k no www && \
-chown -R www:www ${NGX_WWW_ROOT} && \
-# ln nginx
-cd ${PRO_SERVER_PATH} && ln -s /usr/local/nginx/conf nginx
-
-#Clean OS
-RUN yum clean all && \
+# clean os
+yum clean all && \
 rm -rf /tmp/* /var/cache/{yum,ldconfig} /etc/my.cnf{,.d} && \
 mkdir -p --mode=0755 /var/cache/{yum,ldconfig} && \
 find /var/log -type f -delete
@@ -132,7 +134,8 @@ ADD www ${NGX_WWW_ROOT}
 
 # Start
 ADD entrypoint.sh /
-RUN chmod +x /entrypoint.sh
+RUN chown -R www:www ${NGX_WWW_ROOT} && \
+chmod +x /entrypoint.sh
 
 # Set port
 EXPOSE 80 443
