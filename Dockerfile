@@ -39,7 +39,7 @@ libpng-devel \
 libjpeg-devel \
 freetype-devel \
 libmcrypt-devel \
-openssh-server
+openssh-server && \ 
 #
 # make temp folder
 mkdir -p /home/nginx-php && \
