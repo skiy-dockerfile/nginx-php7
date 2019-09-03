@@ -1,10 +1,10 @@
-Nginx and PHP7.2 for Docker
+Nginx and PHP7.3 for Docker
 
 English | [简体中文](./README_CN.md)
 
 ## Last Version
 nginx: **1.17.3**   
-php:   **7.2.22**
+php:   **7.3.9**
 
 ## Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)   
@@ -79,8 +79,6 @@ cd /home/extension/mongodb-1.4.2 && \
 ./configure --with-php-config=/usr/local/php/bin/php-config && \
 make && make install
 ```
-
-## [ChangeLog](changelogs.md)
 
 ## Author
 Author: Skiychan    
