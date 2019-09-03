@@ -108,7 +108,7 @@ cd /home/nginx-php/php-$PHP_VERSION && \
 --disable-debug \
 --without-pear \
 --enable-zip --without-libzip && \
-make && make install
+make && make install && \
 #
 # install php-fpm
 cd /home/nginx-php/php-$PHP_VERSION && \
