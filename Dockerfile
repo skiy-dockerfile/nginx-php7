@@ -39,8 +39,7 @@ libpng-devel \
 libjpeg-devel \
 freetype-devel \
 libmcrypt-devel \
-openssh-server \
-python-setuptools && \
+openssh-server && \
 #
 # make temp folder
 mkdir -p /home/nginx-php && \
@@ -105,7 +104,7 @@ cd /home/nginx-php/php-$PHP_VERSION && \
 --disable-rpath \
 --enable-ipv6 \
 --disable-debug \
---without-pear && \
+--without-pear \
 --enable-zip --without-libzip && \
 make && make install && \
 #
