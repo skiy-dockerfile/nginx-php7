@@ -42,25 +42,6 @@ python-setuptools
 RUN mkdir -p /data/{wwwroot,wwwlogs,server/php/ini,server/php/extension,} && \
 mkdir -p /home/nginx-php
 
-# Make re2c
-#RUN curl -SLO https://github.com/skvadrik/re2c/releases/download/1.2.1/re2c-1.2.1.tar.xz && tar xvJf re2c-1.2.1.tar.xz -C /home/nginx-php && \
-# RUN curl -SLO https://github.com/skvadrik/re2c/releases/download/1.2.1/re2c-1.2.1.tar.xz && tar xvJf re2c-1.2.1.tar.xz -C /home/nginx-php && \
-# cd /home/nginx-php/re2c-1.2.1 && \
-# ./configure && make && make install
-
-# Make libzip
-# RUN curl -Lk https://libzip.org/download/libzip-1.4.0.tar.gz | gunzip | tar x -C /home/nginx-php && \
-# cd /home/nginx-php/libzip-1.3.0 && \ 
-# mkdir build && cd build && cmake .. && make && make install && \
-# #cp /usr/local/lib/libzip/include/zipconf.h /usr/local/include/zipconf.h
-# #ln -s /usr/local/lib/libzip/include/zipconf.h /usr/local/include/zipconf.h
-
-# Make bison
-# curl -Lk http://ftp.gnu.org/gnu/bison/bison-3.4.1.tar.gz | gunzip | tar x -C /home/nginx-php && \
-# RUN curl -Lk http://172.17.0.1/download/bison-3.4.1.tar.gz | gunzip | tar x -C /home/nginx-php && \
-# cd /home/nginx-php/bison-3.4.1 && \
-# ./configure && make && make install
-
 # Make install nginx
 RUN curl -Lk https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
 cd /home/nginx-php/nginx-$NGINX_VERSION && \
@@ -71,6 +52,7 @@ cd /home/nginx-php/nginx-$NGINX_VERSION && \
 --pid-path=/var/run/nginx.pid \
 --with-pcre \
 --with-http_ssl_module \
+--with-http_v2_module \
 --without-mail_pop3_module \
 --without-mail_imap_module \
 --with-http_gzip_static_module && \
@@ -84,7 +66,6 @@ cd /home/nginx-php/php-$PHP_VERSION && \
 --with-config-file-scan-dir=${PHP_EXTENSION_INI_PATH} \
 --with-fpm-user=www \
 --with-fpm-group=www \
-# --with-libzip \
 --with-mysqli \
 --with-pdo-mysql \
 --with-openssl \
@@ -109,7 +90,6 @@ cd /home/nginx-php/php-$PHP_VERSION && \
 --enable-mysqlnd \
 --enable-pcntl \
 --enable-sockets \
---enable-zip \
 --enable-soap \
 --enable-session \
 --enable-opcache \
@@ -120,6 +100,7 @@ cd /home/nginx-php/php-$PHP_VERSION && \
 --enable-ipv6 \
 --disable-debug \
 --without-pear && \
+--enable-zip --without-libzip && \
 make && make install
 
 # Install php-fpm
@@ -136,14 +117,7 @@ chown -R www:www ${NGX_WWW_ROOT} && \
 cd ${PRO_SERVER_PATH} && ln -s /usr/local/nginx/conf nginx
 
 #Clean OS
-RUN yum remove -y gcc \
-gcc-c++ \
-autoconf \
-automake \
-libtool \
-make \
-cmake && \
-yum clean all && \
+RUN yum clean all && \
 rm -rf /tmp/* /var/cache/{yum,ldconfig} /etc/my.cnf{,.d} && \
 mkdir -p --mode=0755 /var/cache/{yum,ldconfig} && \
 find /var/log -type f -delete
