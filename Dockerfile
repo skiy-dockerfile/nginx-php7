@@ -17,13 +17,12 @@ autoconf \
 automake \
 libtool \
 make \
-cmake
-
+cmake \
+#
 # Install PHP library
 ## libmcrypt-devel DIY
-RUN yum history sync && \
-rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm && \
-yum install -y zlib \
+# rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm && \
+zlib \
 zlib-devel \
 openssl \
 openssl-devel \
@@ -75,10 +74,10 @@ cd /home/nginx-php/nginx-$NGINX_VERSION && \
 --without-mail_pop3_module \
 --without-mail_imap_module \
 --with-http_gzip_static_module && \
-make && make install
-
+make && make install && \
+#
 # Make install php
-RUN curl -Lk https://php.net/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+curl -Lk https://php.net/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
 cd /home/nginx-php/php-$PHP_VERSION && \  
 ./configure --prefix=/usr/local/php \
 --with-config-file-path=/usr/local/php/etc \
@@ -127,20 +126,27 @@ make && make install
 RUN cd /home/nginx-php/php-$PHP_VERSION && \
 cp php.ini-production /usr/local/php/etc/php.ini && \
 cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf && \
-cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf
+cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf && \
+rm -rf /home/nginx-php && \
+#
+# Add user
+useradd -r -s /sbin/nologin -d ${NGX_WWW_ROOT} -m -k no www && \
+chown -R www:www ${NGX_WWW_ROOT} && \
+# ln nginx
+cd ${PRO_SERVER_PATH} && ln -s /usr/local/nginx/conf nginx
 
-# Clean OS
-RUN yum clean all && \
+#Clean OS
+RUN yum remove -y gcc \
+gcc-c++ \
+autoconf \
+automake \
+libtool \
+make \
+cmake && \
+yum clean all && \
 rm -rf /tmp/* /var/cache/{yum,ldconfig} /etc/my.cnf{,.d} && \
 mkdir -p --mode=0755 /var/cache/{yum,ldconfig} && \
-find /var/log -type f -delete && \
-rm -rf /home/nginx-php
-
-# Add user
-RUN useradd -r -s /sbin/nologin -d ${NGX_WWW_ROOT} -m -k no www && \
-chown -R www:www ${NGX_WWW_ROOT}
-
-RUN cd ${PRO_SERVER_PATH} && ln -s /usr/local/nginx/conf nginx
+find /var/log -type f -delete
 
 VOLUME ["/data/wwwroot", "/data/wwwlogs", "/data/server/php/ini", "/data/server/php/extension", "/data/server/nginx"]
 
