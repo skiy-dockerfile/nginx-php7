@@ -1,5 +1,8 @@
 
-English(./README.md) | 简体中文
+这个例子基于源码:   
+[https://github.com/skiy/nginx-php7/tree/master/example](https://github.com/skiy/nginx-php7/tree/master/example)
+   
+[English](./README.md) | 简体中文
 
 ### 默认
 ```
@@ -52,5 +55,5 @@ cd /home/extension/swoole-src-4.4.4 && \
 /usr/local/php/bin/phpize && \
 ./configure --with-php-config=/usr/local/php/bin/php-config && \
 make && make install
-```
+```   
 [http://docker.mmapp.cc:38084](http://docker.mmapp.cc:38084)
