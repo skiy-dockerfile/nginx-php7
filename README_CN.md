@@ -1,7 +1,7 @@
 
-English | [简体中文](./README_CN.md)
+English(./README.md) | 简体中文
 
-### Default
+### 默认
 ```
 docker run -d -p 38080:80 \
 skiychan/nginx-php7
@@ -10,7 +10,7 @@ skiychan/nginx-php7
 
 ------
 
-### Custom website directory
+### 自定义网站目录
 ```
 docker run -d -p 38081:80 \
 -v $(pwd)/wwwroot:/data/wwwroot \
@@ -20,7 +20,7 @@ skiychan/nginx-php7
 
 ------
 
-### Bind the domain and the ```SSL``` certificate, make it to support ```HTTPS``.
+### 绑定域名 和 使用 ```SSL``` 证书，让网站支持 ```HTTPS```
 ```
 docker run -d -p 38082:80 \
 -p 38083:443 \
@@ -30,12 +30,12 @@ docker run -d -p 38082:80 \
 -v $(pwd)/ssl:/data/server/nginx/ssl \
 skiychan/nginx-php7
 ```       
-[http://docker.mmapp.cc:38082](http://docker.mmapp.cc:38082)    
+[http://docker.mmapp.cc:38082](http://docker.mmapp.cc:38082)      
 [https://docker.mmapp.cc:38083](https://docker.mmapp.cc:38083)    
 
 ------
 
-### Custom extension
+### 自定义扩展
 ```
 docker run -d -p 38084:80 \
 -v $(pwd)/wwwroot:/data/wwwroot \
@@ -44,8 +44,8 @@ docker run -d -p 38084:80 \
 -v $(pwd)/extension:/data/server/php/extension \
 skiychan/nginx-php7
 ```
-1. Create the file ```ext-swoole.ini``` in the ```/$(pwd)/ini/``` directory: ```extension=swoole.so```      
-2. Create a file ```extension.sh``` in the ```$(pwd)/extension/``` directory (you cannot change the file name):   
+1. 在 ```$(pwd)/ini/``` 目录下创建文件 ```ext-swoole.ini``` ，内容为 ```extension=swoole.so```;   
+2. 在 ```$(pwd)/extension/``` 目录下创建文件 ```extension.sh```(不可更改文件名)，内容如下：   
 ```
 curl -Lk https://github.com/swoole/swoole-src/archive/v4.4.4.tar.gz | gunzip | tar x -C /home/extension && \
 cd /home/extension/swoole-src-4.4.4 && \
