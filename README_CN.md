@@ -1,24 +1,24 @@
-Nginx and PHP7.2 for Docker
+# Nginx and PHP7.2 for Docker
 
 [English](./README.md) | 简体中文
 
-## 最新版本
+# 最新版本
 nginx: **1.17.3**   
 php:   **7.3.9**
 
-## Docker Hub   
+# Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)  
 
 **[Example](https://github.com/skiy/nginx-php7/wiki/Example)** 
 
-## 构建
+# 构建
 ```sh
 git pull origin https://github.com/skiy/nginx-php7.git
 cd nginx-php7
 docker build -t nginx-php7 .
 ```
    
-## 安装使用
+# 安装使用
 从 Docker 拉取镜像
 ```sh
 docker pull skiychan/nginx-php7:latest
@@ -29,14 +29,14 @@ docker pull skiychan/nginx-php7:latest
 docker pull skiychan/nginx-php7:nightly
 ```
 
-## 启动
+# 启动
 使用镜像启动基础容器
 ```sh
 docker run --name nginx -p 8080:80 -d skiychan/nginx-php7
 ```
 你可以通过浏览器访问```http://\<docker_host\>:8080``` 查看 ```PHP``` 配置信息。
 
-## 添加自定义目录
+# 添加自定义目录
 如果你想自定义网站目录，你可以使用以下方式启动。
 ```sh
 docker run --name nginx -p 8080:80 -v /your_code_directory:/data/www -d skiychan/nginx-php7
@@ -52,7 +52,7 @@ docker run --name nginx -p 8080:80 \
 -d skiychan/nginx-php7
 ```
 
-## 添加 PHP 扩展
+# 添加 PHP 扩展
 添加 **ext-xxx.ini** 到目录 ```/your_php_extension_ini``` 和相应的扩展文件代码到 ```/your_php_extension_file``` 中，使用使用以下命令启动。   
 ```sh
 docker run --name nginx \
@@ -74,7 +74,10 @@ cd /home/extension/mongodb-1.4.2 && \
 make && make install
 ```
 
-## 作者
+# 作者
 Author: Skiychan    
 Email:  dev@skiy.net       
 Link:   https://www.skiy.net
+
+# 感谢
+<a href="https://www.jetbrains.com/?from=GoFrame"><img src="https://camo.githubusercontent.com/d4143cfccf26532a30c578a2689bafcc5aa41572/68747470733a2f2f676f6672616d652e6f72672f696d616765732f6a6574627261696e732e706e67" width="100" alt="JetBrains"/></a>

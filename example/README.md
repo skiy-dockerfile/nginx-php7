@@ -17,7 +17,7 @@ docker run -p 8080:80 \
 - **HTTPS**: https://127.0.0.1:8443
 
 If you modify the hosts, you can open the website with the domain.
-- https://test.docker.mmapp.cc
+- https://test.docker.mmapp.cc:8443
 ```sh
 echo '0.0.0.0 test.docker.mmapp.cc' >> /etc/hosts
 ```
