@@ -3,8 +3,8 @@ Nginx and PHP7.2 for Docker
 [English](./README.md) | 简体中文
 
 ## 最新版本
-nginx: **1.17.4**   
-php:   **7.2.23**
+Nginx: **1.17.5**   
+PHP:   **7.2.24**
 
 ## Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)  
@@ -41,7 +41,10 @@ docker run --name nginx -p 8080:80 -d skiychan/nginx-php7
 ```sh
 docker run --name nginx -p 8080:80 -v /your_code_directory:/data/www -d skiychan/nginx-php7
 ```
-**更多**
+
+<details>
+    <summary><mark>更多</mark></summary>
+
 ```
 docker run --name nginx -p 8080:80 \
 -v /your_code_directory:/data/wwwroot \
@@ -73,8 +76,7 @@ cd /home/extension/mongodb-1.4.2 && \
 ./configure --with-php-config=/usr/local/php/bin/php-config && \
 make && make install
 ```
-
-## [更新日志](changelogs.md) 
+</details>
 
 ## 作者
 Author: Skiychan    

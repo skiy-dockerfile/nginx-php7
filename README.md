@@ -3,8 +3,8 @@ Nginx and PHP7.2 for Docker
 English | [简体中文](./README_CN.md)
 
 ## Last Version
-nginx: **1.17.4**   
-php:   **7.2.23**
+Nginx: **1.17.5**   
+PHP:   **7.2.24**
 
 ## Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)   
@@ -45,7 +45,9 @@ If you want to link to your web site directory on the docker host to the contain
 docker run --name nginx -p 8080:80 -v /your_code_directory:/data/wwwroot -d skiychan/nginx-php7
 ```
 
-**More**
+<details>
+    <summary><mark>More</mark></summary>
+
 ```
 docker run --name nginx -p 8080:80 \
 -v /your_code_directory:/data/wwwroot \
@@ -57,7 +59,7 @@ docker run --name nginx -p 8080:80 \
 ```
 
 ## Enabling Extensions With Source
-add **ext-xxx.ini** to folder ```/your_php_extension_ini```, source ```/your_php_extension_file```. then run the command:   
+Add **ext-xxx.ini** to folder ```/your_php_extension_ini```, source ```/your_php_extension_file```. then run the command:   
 ```sh
 docker run --name nginx \
 -p 8080:80 -d \
@@ -79,8 +81,7 @@ cd /home/extension/mongodb-1.4.2 && \
 ./configure --with-php-config=/usr/local/php/bin/php-config && \
 make && make install
 ```
-
-## [ChangeLog](changelogs.md)
+</details>
 
 ## Author
 Author: Skiychan    
