@@ -4,7 +4,7 @@ English | [简体中文](./README_CN.md)
 
 # Last Version
 NGINX: **1.17.5**   
-PHP:   **7.3.10**
+PHP:   **7.3.11**
 
 > **PHP 7.2.** plesae visit [v2](https://github.com/skiy/nginx-php7/tree/v2) branch.
 
@@ -47,7 +47,8 @@ If you want to link to your web site directory on the docker host to the contain
 docker run --name nginx -p 8080:80 -v /your_code_directory:/data/wwwroot -d skiychan/nginx-php7
 ```
 
-**More**
+<details>
+    <summary><mark>**More**</mark></summary>
 ```
 docker run --name nginx -p 8080:80 \
 -v /your_code_directory:/data/wwwroot \
@@ -81,6 +82,7 @@ cd /home/extension/mongodb-1.4.2 && \
 ./configure --with-php-config=/usr/local/php/bin/php-config && \
 make && make install
 ```
+</details>
 
 # Author
 Author: Skiychan    

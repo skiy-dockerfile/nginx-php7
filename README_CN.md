@@ -4,7 +4,7 @@
 
 # 最新版本
 NGINX: **1.17.5**   
-PHP:   **7.3.10**
+PHP:   **7.3.11**
 
 > **PHP 7.2.** 请访问 [v2](https://github.com/skiy/nginx-php7/tree/v2) 分支。
 
@@ -43,7 +43,9 @@ docker run --name nginx -p 8080:80 -d skiychan/nginx-php7
 ```sh
 docker run --name nginx -p 8080:80 -v /your_code_directory:/data/www -d skiychan/nginx-php7
 ```
-**更多**
+
+<details>
+    <summary><mark>**更多**</mark></summary>
 ```
 docker run --name nginx -p 8080:80 \
 -v /your_code_directory:/data/wwwroot \
@@ -75,6 +77,7 @@ cd /home/extension/mongodb-1.4.2 && \
 ./configure --with-php-config=/usr/local/php/bin/php-config && \
 make && make install
 ```
+</details>
 
 # 作者
 Author: Skiychan    
