@@ -48,7 +48,8 @@ docker run --name nginx -p 8080:80 -v /your_code_directory:/data/wwwroot -d skiy
 ```
 
 <details>
-    <summary><mark>**More**</mark></summary>
+    <summary><mark>More</mark></summary>
+
 ```
 docker run --name nginx -p 8080:80 \
 -v /your_code_directory:/data/wwwroot \

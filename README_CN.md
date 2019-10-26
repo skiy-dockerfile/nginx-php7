@@ -45,7 +45,8 @@ docker run --name nginx -p 8080:80 -v /your_code_directory:/data/www -d skiychan
 ```
 
 <details>
-    <summary><mark>**更多**</mark></summary>
+    <summary><mark>更多</mark></summary>
+
 ```
 docker run --name nginx -p 8080:80 \
 -v /your_code_directory:/data/wwwroot \
