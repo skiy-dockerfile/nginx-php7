@@ -61,7 +61,7 @@ docker run --name nginx -p 8080:80 \
 ```
 
 # Enabling Extensions With Source
-add **ext-xxx.ini** to folder ```/your_php_extension_ini```, source ```/your_php_extension_file```. then run the command:   
+Add **ext-xxx.ini** to folder ```/your_php_extension_ini```, source ```/your_php_extension_file```. then run the command:   
 ```sh
 docker run --name nginx \
 -p 8080:80 -d \
@@ -70,19 +70,20 @@ docker run --name nginx \
 skiychan/nginx-php7
 ```
 
-```/your_php_extension_ini/ext-xxx.ini``` file content:
+**/your_php_extension_ini/ext-xxx.ini** file content:   
 ```
 extension=mongodb.so
 ```
 
-```/your_php_extension_file/extension.sh```: 
-```  
+**/your_php_extension_file/extension.sh** file content:   
+```
 curl -Lk https://pecl.php.net/get/mongodb-1.4.2.tgz | gunzip | tar x -C /home/extension && \
 cd /home/extension/mongodb-1.4.2 && \
 /usr/local/php/bin/phpize && \
 ./configure --with-php-config=/usr/local/php/bin/php-config && \
 make && make install
 ```
+
 </details>
 
 # Author

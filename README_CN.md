@@ -66,11 +66,13 @@ docker run --name nginx \
 -v /your_php_extension_file:/data/server/php/extension \
 skiychan/nginx-php7
 ```
-```/your_php_extension_ini/ext-xxx.ini``` 文件中的内容为
+
+**/your_php_extension_ini/ext-xxx.ini** 文件的内容为:   
 ```
 extension=mongodb.so
 ```
-扩展编译代码基本编写内容如下，详情请查看```/your_php_extension_file/extension.sh```文件：
+
+**/your_php_extension_file/extension.sh** 文件的内容为:   
 ```
 curl -Lk https://pecl.php.net/get/mongodb-1.4.2.tgz | gunzip | tar x -C /home/extension && \
 cd /home/extension/mongodb-1.4.2 && \
@@ -78,6 +80,7 @@ cd /home/extension/mongodb-1.4.2 && \
 ./configure --with-php-config=/usr/local/php/bin/php-config && \
 make && make install
 ```
+
 </details>
 
 # 作者
