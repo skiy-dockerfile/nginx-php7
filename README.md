@@ -3,8 +3,8 @@ Nginx and PHP7.2 for Docker
 English | [简体中文](./README_CN.md)
 
 ## Last Version
-Nginx: **1.17.5**   
-PHP:   **7.2.24**
+Nginx: **1.17.6**   
+PHP:   **7.2.25**
 
 ## Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)   
