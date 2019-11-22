@@ -3,10 +3,10 @@
 [English](./README.md) | 简体中文
 
 # 最新版本
-NGINX: **1.17.5**   
-PHP:   **7.3.11**
+NGINX: **1.17.6**   
+PHP:   **7.3.12**
 
-> **PHP 7.2.** 请访问 [v2](https://github.com/skiy/nginx-php7/tree/v2) 分支。
+> **PHP 7.2.** 请访问 [v2 分支](https://github.com/skiy/nginx-php7/tree/v2)。
 
 # Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)  

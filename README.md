@@ -3,10 +3,10 @@
 English | [简体中文](./README_CN.md)
 
 # Last Version
-NGINX: **1.17.5**   
-PHP:   **7.3.11**
+NGINX: **1.17.6**   
+PHP:   **7.3.12**
 
-> **PHP 7.2.** plesae visit [v2](https://github.com/skiy/nginx-php7/tree/v2) branch.
+> **PHP 7.2.** plesae visit [v2 branch](https://github.com/skiy/nginx-php7/tree/v2).
 
 # Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)   
