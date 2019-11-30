@@ -4,14 +4,12 @@ English | [简体中文](./README_CN.md)
 
 # Last Version
 NGINX: **1.17.6**   
-PHP:   **7.3.12**
-
-> **PHP 7.2.x(Deprecated)** plesae visit [v2 branch](https://github.com/skiy/nginx-php7/tree/v2).
+PHP:   **7.4.0**
 
 # Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)   
 
-**[Example](https://github.com/skiy/nginx-php7/wiki/Example)**
+**[Documents](https://github.com/skiy/nginx-php7/wiki/Example)**
 
 # Build
 ```sh
