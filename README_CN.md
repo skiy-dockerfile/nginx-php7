@@ -1,4 +1,5 @@
 Nginx and PHP7.2 for Docker
+**(已弃用)**
 
 [English](./README.md) | 简体中文
 

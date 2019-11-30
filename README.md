@@ -1,4 +1,5 @@
 Nginx and PHP7.2 for Docker
+**(Deprecated)**
 
 English | [简体中文](./README_CN.md)
 
