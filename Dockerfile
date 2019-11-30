@@ -31,6 +31,7 @@ zlib-devel \
 openssl \
 openssl-devel \
 pcre-devel \
+sqlite-devel \
 libxml2 \
 libxml2-devel \
 libcurl \
@@ -63,6 +64,10 @@ make && make install && \
 useradd -r -s /sbin/nologin -d ${NGX_WWW_ROOT} -m -k no www && \
 # ln nginx
 cd ${PRO_SERVER_PATH} && ln -s /usr/local/nginx/conf nginx && \
+curl -Lk https://github.com/kkos/oniguruma/releases/download/v6.9.4/onig-6.9.4.tar.gz | gunzip | tar x -C /home/nginx-php && \
+cd /home/nginx-php/onig-6.9.4 && \
+./configure && \
+make && make install && \
 #
 # install php
 curl -Lk https://php.net/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
@@ -107,7 +112,8 @@ cd /home/nginx-php/php-$PHP_VERSION && \
 --enable-ipv6 \
 --disable-debug \
 --without-pear \
---enable-zip --without-libzip && \
+--without-libzip && \
+--enable-zip 
 make && make install && \
 #
 # install php-fpm
