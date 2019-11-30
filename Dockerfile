@@ -31,7 +31,8 @@ zlib-devel \
 openssl \
 openssl-devel \
 pcre-devel \
-sqlite-devel \
+sqlite sqlite-devel \
+oniguruma oniguruma-devel \
 libxml2 \
 libxml2-devel \
 libcurl \
