@@ -13,6 +13,8 @@ ENV PHP_EXTENSION_INI_PATH=/data/server/php/ini
 ## mkdir folders
 RUN mkdir -p /data/{wwwroot,wwwlogs,server/php/ini,server/php/extension,}
 
+RUN yum install -y epel-release
+
 ## install libraries
 RUN set -x && \
 yum install -y gcc \
