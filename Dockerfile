@@ -115,8 +115,8 @@ cd /home/nginx-php/php-$PHP_VERSION && \
 --enable-ipv6 \
 --disable-debug \
 --without-pear \
---without-libzip && \
---enable-zip 
+--without-libzip \
+--enable-zip && \
 make && make install && \
 #
 # install php-fpm
