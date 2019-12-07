@@ -45,7 +45,6 @@ freetype-devel \
 libmcrypt-devel \
 libicu \
 openssh-server && \ 
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/:$PKG_CONFIG_PATH && \
 #
 # make temp folder
 mkdir -p /home/nginx-php && \
@@ -77,7 +76,8 @@ make && make install && \
 # install php
 curl -Lk https://php.net/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
 # curl -Lk http://172.17.0.1/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
-cd /home/nginx-php/php-$PHP_VERSION && \  
+cd /home/nginx-php/php-$PHP_VERSION && \ 
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/:$PKG_CONFIG_PATH && \ 
 ./configure --prefix=/usr/local/php \
 --with-config-file-path=/usr/local/php/etc \
 --with-config-file-scan-dir=${PHP_EXTENSION_INI_PATH} \
