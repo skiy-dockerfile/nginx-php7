@@ -43,6 +43,7 @@ libpng-devel \
 libjpeg-devel \
 freetype-devel \
 libmcrypt-devel \
+libicu \
 openssh-server && \ 
 #
 # make temp folder
