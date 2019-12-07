@@ -45,6 +45,7 @@ freetype-devel \
 libmcrypt-devel \
 libicu \
 openssh-server && \ 
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/:$PKG_CONFIG_PATH && \
 #
 # make temp folder
 mkdir -p /home/nginx-php && \
