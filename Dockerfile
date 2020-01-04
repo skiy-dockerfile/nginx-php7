@@ -26,8 +26,6 @@ make \
 cmake \
 #
 # install PHP libraries
-## libmcrypt-devel DIY
-# rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm && \
 zlib \
 zlib-devel \
 openssl \
@@ -48,8 +46,8 @@ openssh-server && \
 # make temp folder
 mkdir -p /home/nginx-php && \
 # install nginx
-#curl -Lk https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
-curl -Lk http://172.17.0.1/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+curl -Lk https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+#curl -Lk http://172.17.0.1/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
 cd /home/nginx-php/nginx-$NGINX_VERSION && \
 ./configure --prefix=/usr/local/nginx \
 --user=www --group=www \
@@ -69,8 +67,8 @@ useradd -r -s /sbin/nologin -d ${NGX_WWW_ROOT} -m -k no www && \
 cd ${PRO_SERVER_PATH} && ln -s /usr/local/nginx/conf nginx && \
 #
 # install php
-#curl -Lk https://php.net/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
-curl -Lk http://172.17.0.1/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+curl -Lk https://php.net/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+#curl -Lk http://172.17.0.1/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
 cd /home/nginx-php/php-$PHP_VERSION && \  
 ./configure --prefix=/usr/local/php \
 --with-config-file-path=/usr/local/php/etc \
