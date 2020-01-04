@@ -1,8 +1,8 @@
 FROM centos:7
 MAINTAINER Skiychan <dev@skiy.net>
 
-ENV NGINX_VERSION 1.17.6
-ENV PHP_VERSION 7.4.0
+ENV NGINX_VERSION 1.17.7
+ENV PHP_VERSION 7.4.1
 
 ENV PRO_SERVER_PATH=/data/server
 ENV NGX_WWW_ROOT=/data/wwwroot
@@ -33,8 +33,7 @@ zlib-devel \
 openssl \
 openssl-devel \
 pcre-devel \
-sqlite sqlite-devel \
-oniguruma oniguruma-devel \
+sqlite-devel \
 libxml2 \
 libxml2-devel \
 libcurl \
@@ -43,14 +42,14 @@ libpng-devel \
 libjpeg-devel \
 freetype-devel \
 libmcrypt-devel \
-libicu \
-openssh-server && \ 
+oniguruma oniguruma-devel \
+openssh-server && \
 #
 # make temp folder
 mkdir -p /home/nginx-php && \
 # install nginx
-curl -Lk https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
-# RUN curl -Lk http://172.17.0.1/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+#curl -Lk https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+curl -Lk http://172.17.0.1/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
 cd /home/nginx-php/nginx-$NGINX_VERSION && \
 ./configure --prefix=/usr/local/nginx \
 --user=www --group=www \
@@ -68,57 +67,52 @@ make && make install && \
 useradd -r -s /sbin/nologin -d ${NGX_WWW_ROOT} -m -k no www && \
 # ln nginx
 cd ${PRO_SERVER_PATH} && ln -s /usr/local/nginx/conf nginx && \
-curl -Lk https://github.com/kkos/oniguruma/releases/download/v6.9.4/onig-6.9.4.tar.gz | gunzip | tar x -C /home/nginx-php && \
-cd /home/nginx-php/onig-6.9.4 && \
-./configure && \
-make && make install && \
 #
 # install php
-curl -Lk https://php.net/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
-# curl -Lk http://172.17.0.1/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
-cd /home/nginx-php/php-$PHP_VERSION && \ 
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/:$PKG_CONFIG_PATH && \ 
+#curl -Lk https://php.net/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+curl -Lk http://172.17.0.1/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+cd /home/nginx-php/php-$PHP_VERSION && \  
 ./configure --prefix=/usr/local/php \
 --with-config-file-path=/usr/local/php/etc \
 --with-config-file-scan-dir=${PHP_EXTENSION_INI_PATH} \
 --with-fpm-user=www \
 --with-fpm-group=www \
---enable-fpm \
---disable-fileinfo \
---enable-opcache \
---enable-mysqlnd \
---with-mysqli=mysqlnd \
---with-pdo-mysql=mysqlnd \
---with-iconv-dir=/usr/local \
---with-freetype \
---with-jpeg \
+--with-mysqli \
+--with-pdo-mysql \
+--with-openssl \
+--with-gd \
+--with-iconv \
 --with-zlib \
+--with-gettext \
+--with-curl \
+--with-png-dir \
+--with-jpeg-dir \
+--with-freetype-dir \
+--with-xmlrpc \
+--with-mhash \
+--enable-fpm \
 --enable-xml \
---disable-rpath \
---enable-bcmath \
 --enable-shmop \
---enable-exif \
 --enable-sysvsem \
 --enable-inline-optimization \
---with-curl \
 --enable-mbregex \
 --enable-mbstring \
---with-password-argon2 \
---with-sodium=/usr/local \
---enable-gd \
---with-openssl \
---with-mhash \
+--enable-ftp \
+--enable-mysqlnd \
 --enable-pcntl \
 --enable-sockets \
---with-xmlrpc \
---enable-ftp \
---enable-intl \
---with-xsl \
---with-gettext \
---enable-zip \
---without-libzip \
 --enable-soap \
---disable-debug && \
+--enable-session \
+--enable-opcache \
+--enable-bcmath \
+--enable-exif \
+--enable-fileinfo \
+--disable-rpath \
+--enable-ipv6 \
+--disable-debug \
+--without-pear \
+--without-libzip \
+--enable-zip && \
 make && make install && \
 #
 # install php-fpm
@@ -126,7 +120,6 @@ cd /home/nginx-php/php-$PHP_VERSION && \
 cp php.ini-production /usr/local/php/etc/php.ini && \
 cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf && \
 cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf && \
-rm -rf /home/nginx-php && \
 #
 # remove temp folder
 rm -rf /home/nginx-php && \
