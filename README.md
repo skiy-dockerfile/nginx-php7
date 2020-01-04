@@ -6,8 +6,6 @@ English | [简体中文](./README_CN.md)
 NGINX: **1.17.7**   
 PHP:   **7.3.13**
 
-> **PHP 7.2.** plesae visit [v2 branch](https://github.com/skiy/nginx-php7/tree/v2).
-
 # Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)   
 
@@ -72,13 +70,13 @@ skiychan/nginx-php7
 
 **/your_php_extension_ini/ext-xxx.ini** file content:   
 ```
-extension=mongodb.so
+extension=swoole.so
 ```
 
 **/your_php_extension_file/extension.sh** file content:   
 ```
-curl -Lk https://pecl.php.net/get/mongodb-1.4.2.tgz | gunzip | tar x -C /home/extension && \
-cd /home/extension/mongodb-1.4.2 && \
+curl -Lk https://github.com/swoole/swoole-src/archive/v4.4.14.tar.gz | gunzip | tar x -C /home/extension && \
+cd /home/extension/swoole-src-4.4.14 && \
 /usr/local/php/bin/phpize && \
 ./configure --with-php-config=/usr/local/php/bin/php-config && \
 make && make install
