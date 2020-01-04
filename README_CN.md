@@ -69,7 +69,7 @@ skiychan/nginx-php7
 
 **/your_php_extension_ini/ext-xxx.ini** 文件的内容为:   
 ```
-extension=mongodb.so
+extension=swoole.so
 ```
 
 **/your_php_extension_file/extension.sh** 文件的内容为:   
