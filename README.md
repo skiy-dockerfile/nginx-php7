@@ -3,7 +3,7 @@
 English | [简体中文](./README_CN.md)
 
 # Last Version
-NGINX: **1.17.7**   
+NGINX: **1.17.8**   
 PHP:   **7.4.1**
 
 > **PHP 7.3.\*** plesae visit [v3 branch](https://github.com/skiy/nginx-php7/tree/v3).
