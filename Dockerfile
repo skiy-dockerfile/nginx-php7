@@ -112,9 +112,8 @@ cd /home/nginx-php/php-$PHP_VERSION && \
 cp php.ini-production /usr/local/php/etc/php.ini && \
 cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf && \
 cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf && \
-# set php bin
-echo "export PATH=/usr/local/php/bin:\$PATH" >> /etc/profile && \
-source /etc/profile && \
+# php command support
+ln -s /usr/local/php/bin/* /bin/ && \
 #
 # remove temp folder
 rm -rf /home/nginx-php && \
