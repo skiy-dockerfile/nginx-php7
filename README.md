@@ -27,9 +27,9 @@ Pull the image from the docker index rather than downloading the git repo. This 
 docker pull skiychan/nginx-php7:latest
 ```
 
-To pull the Nightly Version:   
+To pull the develop Version:   
 ```
-docker pull skiychan/nginx-php7:nightly
+docker pull skiychan/nginx-php7:dev
 ```
 
 # Running

@@ -26,9 +26,9 @@ docker build -t nginx-php7 .
 docker pull skiychan/nginx-php7:latest
 ```
 
-拉取测试版:   
+拉取开发版:   
 ```
-docker pull skiychan/nginx-php7:nightly
+docker pull skiychan/nginx-php7:dev
 ```
 
 # 启动
