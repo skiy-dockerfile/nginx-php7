@@ -13,7 +13,7 @@ PHP:   **7.3.14**
 
 # 构建
 ```sh
-git pull origin https://github.com/skiy/nginx-php7.git
+git clone https://github.com/skiy/nginx-php7.git -b v3
 cd nginx-php7
 docker build -t nginx-php7 .
 ```
@@ -21,25 +21,20 @@ docker build -t nginx-php7 .
 # 安装使用
 从 Docker 拉取镜像
 ```sh
-docker pull skiychan/nginx-php7:latest
-```
-
-拉取测试版:   
-```
-docker pull skiychan/nginx-php7:nightly
+docker pull skiychan/nginx-php7:TAG_NAME
 ```
 
 # 启动
 使用镜像启动基础容器
 ```sh
-docker run --name nginx -p 8080:80 -d skiychan/nginx-php7
+docker run --name nginx -p 8080:80 -d skiychan/nginx-php7:TAG_NAME
 ```
 你可以通过浏览器访问```http://\<docker_host\>:8080``` 查看 ```PHP``` 配置信息。
 
 # 添加自定义目录
 如果你想自定义网站目录，你可以使用以下方式启动。
 ```sh
-docker run --name nginx -p 8080:80 -v /your_code_directory:/data/www -d skiychan/nginx-php7
+docker run --name nginx -p 8080:80 -v /your_code_directory:/data/www -d skiychan/nginx-php7:TAG_NAME
 ```
 
 <details>
@@ -52,7 +47,7 @@ docker run --name nginx -p 8080:80 \
 -v /your_nginx_conf_path:/data/server/nginx \
 -v /your_php_extension_ini:/data/server/php/ini \
 -v /your_php_extension_file:/data/server/php/extension \
--d skiychan/nginx-php7
+-d skiychan/nginx-php7:TAG_NAME
 ```
 
 # 添加 PHP 扩展
@@ -62,7 +57,7 @@ docker run --name nginx \
 -p 8080:80 -d \
 -v /your_php_extension_ini:/data/server/php/ini \
 -v /your_php_extension_file:/data/server/php/extension \
-skiychan/nginx-php7
+skiychan/nginx-php7:TAG_NAME
 ```
 
 **/your_php_extension_ini/ext-xxx.ini** 文件的内容为:   

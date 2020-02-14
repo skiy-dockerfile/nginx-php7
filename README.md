@@ -13,7 +13,7 @@ PHP:   **7.3.14**
 
 # Build
 ```sh
-git pull origin https://github.com/skiy/nginx-php7.git
+git clone https://github.com/skiy/nginx-php7.git -b v3
 cd nginx-php7
 docker build -t nginx-php7 .
 ```
@@ -22,19 +22,14 @@ docker build -t nginx-php7 .
 Pull the image from the docker index rather than downloading the git repo. This prevents you having to build the image on every docker host.
 
 ```sh   
-docker pull skiychan/nginx-php7:latest
-```
-
-To pull the Nightly Version:   
-```
-docker pull skiychan/nginx-php7:nightly
+docker pull skiychan/nginx-php7:TAG_NAME
 ```
 
 # Running
 To simply run the container:
 
 ```sh
-docker run --name nginx -p 8080:80 -d skiychan/nginx-php7
+docker run --name nginx -p 8080:80 -d skiychan/nginx-php7:TAG_NAME
 ```
 You can then browse to ```http://\<docker_host\>:8080``` to view the default install files.
 
@@ -42,7 +37,7 @@ You can then browse to ```http://\<docker_host\>:8080``` to view the default ins
 If you want to link to your web site directory on the docker host to the container run:
 
 ```sh
-docker run --name nginx -p 8080:80 -v /your_code_directory:/data/wwwroot -d skiychan/nginx-php7
+docker run --name nginx -p 8080:80 -v /your_code_directory:/data/wwwroot -d skiychan/nginx-php7:TAG_NAME
 ```
 
 <details>
@@ -55,7 +50,7 @@ docker run --name nginx -p 8080:80 \
 -v /your_nginx_conf_path:/data/server/nginx \
 -v /your_php_extension_ini:/data/server/php/ini \
 -v /your_php_extension_file:/data/server/php/extension \
--d skiychan/nginx-php7
+-d skiychan/nginx-php7:TAG_NAME
 ```
 
 # Enabling Extensions With Source
@@ -65,7 +60,7 @@ docker run --name nginx \
 -p 8080:80 -d \
 -v /your_php_extension_ini:/data/server/php/ini \
 -v /your_php_extension_file:/data/server/php/extension \
-skiychan/nginx-php7
+skiychan/nginx-php7:TAG_NAME
 ```
 
 **/your_php_extension_ini/ext-xxx.ini** file content:   
