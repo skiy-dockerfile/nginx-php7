@@ -15,7 +15,7 @@ PHP:   **7.4.2**
 
 # Build
 ```sh
-git pull origin https://github.com/skiy/nginx-php7.git
+git clone https://github.com/skiy/nginx-php7.git
 cd nginx-php7
 docker build -t nginx-php7 .
 ```
