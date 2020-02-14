@@ -78,14 +78,10 @@ cd /home/nginx-php/php-$PHP_VERSION && \
 --with-mysqli \
 --with-pdo-mysql \
 --with-openssl \
---with-gd \
 --with-iconv \
 --with-zlib \
 --with-gettext \
 --with-curl \
---with-png-dir \
---with-jpeg-dir \
---with-freetype-dir \
 --with-xmlrpc \
 --with-mhash \
 --enable-fpm \
@@ -108,9 +104,7 @@ cd /home/nginx-php/php-$PHP_VERSION && \
 --disable-rpath \
 --enable-ipv6 \
 --disable-debug \
---without-pear \
---without-libzip \
---enable-zip && \
+--without-pear && \
 make && make install && \
 #
 # install php-fpm
