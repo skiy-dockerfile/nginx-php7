@@ -4,7 +4,7 @@
 
 # 最新版本
 NGINX: **1.17.8**   
-PHP:   **7.3.14**
+PHP:   **7.3.15**
 
 # Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)  
