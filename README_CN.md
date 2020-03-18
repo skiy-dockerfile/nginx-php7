@@ -3,7 +3,7 @@
 [English](./README.md) | 简体中文
 
 # 最新版本
-NGINX: **1.17.8**   
+NGINX: **1.17.9**   
 PHP:   **7.4.3**
 
 > **PHP 7.3.\*** 请访问 [v3 分支](https://github.com/skiy/nginx-php7/tree/v3)。
