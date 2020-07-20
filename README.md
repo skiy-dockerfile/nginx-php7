@@ -1,10 +1,11 @@
 # Nginx and PHP7.3 for Docker
+**[This branch has stopped maintenance]**   
 
 English | [简体中文](./README_CN.md)
 
 # Last Version
-NGINX: **1.17.8**   
-PHP:   **7.3.15**
+NGINX: **1.19.1**   
+PHP:   **7.3.20**
 
 # Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)   
@@ -79,10 +80,8 @@ make && make install
 
 </details>
 
-# Author
-Author: Skiychan    
-Email:  dev@skiy.net       
-Link:   https://www.skiy.net
+# License
+This project is licensed under the [MIT license](https://github.com/skiy/nginx-php7/blob/master/LICENSE).  
 
 # Thanks
 <a href="https://www.jetbrains.com/?from=nginx-php7" target="_blank"><img src="https://camo.githubusercontent.com/d4143cfccf26532a30c578a2689bafcc5aa41572/68747470733a2f2f676f6672616d652e6f72672f696d616765732f6a6574627261696e732e706e67" width="100" alt="JetBrains"/></a>
