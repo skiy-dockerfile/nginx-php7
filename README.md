@@ -1,5 +1,5 @@
-Nginx and PHP7.2 for Docker
-**(Deprecated)**
+# Nginx and PHP7.2 for Docker
+**[This branch has stopped maintenance]**   
 
 English | [简体中文](./README_CN.md)
 
@@ -8,7 +8,7 @@ Nginx: **1.17.6**
 PHP:   **7.2.25**
 
 ## Docker Hub   
-**Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)   
+**Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/repository/docker/skiychan/nginx-php7)   
 
 **[Example](https://github.com/skiy/nginx-php7/wiki/Example)**
 
@@ -83,8 +83,3 @@ cd /home/extension/mongodb-1.4.2 && \
 make && make install
 ```
 </details>
-
-## Author
-Author: Skiychan    
-Email:  dev@skiy.net       
-Link:   https://www.skiy.net
