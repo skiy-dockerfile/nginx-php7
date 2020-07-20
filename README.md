@@ -6,8 +6,6 @@ English | [简体中文](./README_CN.md)
 NGINX: **1.19.1**   
 PHP:   **7.4.8**
 
-> **PHP 7.3.\*** plesae visit [v3 branch](https://github.com/skiy/nginx-php7/tree/v3).
-
 # Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)   
 
