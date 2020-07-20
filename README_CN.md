@@ -83,10 +83,8 @@ make && make install
 
 </details>
 
-# 作者
-Author: Skiychan    
-Email:  dev@skiy.net       
-Link:   https://www.skiy.net
+# License
+本项目遵循 [MIT 开源协议](https://github.com/skiy/nginx-php7/blob/master/LICENSE).
 
 # 感谢
 <a href="https://www.jetbrains.com/?from=nginx-php7" target="_blank"><img src="https://camo.githubusercontent.com/d4143cfccf26532a30c578a2689bafcc5aa41572/68747470733a2f2f676f6672616d652e6f72672f696d616765732f6a6574627261696e732e706e67" width="100" alt="JetBrains"/></a>
