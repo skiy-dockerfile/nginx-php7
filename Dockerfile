@@ -2,7 +2,7 @@ FROM centos:7
 MAINTAINER Skiychan <dev@skiy.net>
 
 ENV NGINX_VERSION 1.19.1
-ENV PHP_VERSION 7.4.8
+ENV PHP_VERSION 7.4.9
 
 ENV PRO_SERVER_PATH=/data/server
 ENV NGX_WWW_ROOT=/data/wwwroot
