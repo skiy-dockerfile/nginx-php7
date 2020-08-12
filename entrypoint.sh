@@ -16,13 +16,26 @@ InstallTools() {
     cmake
 }
 
+ClearTools() {
+    yum remove -y gcc \
+    gcc-c++ \
+    autoconf \
+    automake \
+    libtool \
+    make \
+    cmake && \
+    yum clean all
+}
+
 # Add PHP Extension
 if [ -f "${PHP_EXTENSION_SH_PATH}/extension.sh" ]; then
-    # InstallTools
+    InstallTools
 
     sh ${PHP_EXTENSION_SH_PATH}/extension.sh
     mv -f ${PHP_EXTENSION_SH_PATH}/extension.sh ${PHP_EXTENSION_SH_PATH}/extension_back.sh
 fi
+
+ClearTools
 
 # /usr/local/php/sbin/php-fpm -F
 /usr/local/php/sbin/php-fpm -D

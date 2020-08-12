@@ -48,6 +48,7 @@ tar -zxf onig-6.9.5-rev1.tar.gz && \
 cd onig-6.9.5 && \
 ./configure --prefix=/usr && \
 make && make install && \
+rm -rf onig-6.9.5* && \ 
 #
 # make temp folder
 mkdir -p /home/nginx-php && \
