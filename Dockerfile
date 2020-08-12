@@ -41,17 +41,15 @@ freetype-devel \
 libmcrypt-devel \
 #oniguruma \
 openssh-server && \
-# 
-# install oniguruma
-curl -SL -O https://github.com/kkos/oniguruma/releases/download/v6.9.5_rev1/onig-6.9.5-rev1.tar.gz && \
-tar -zxf onig-6.9.5-rev1.tar.gz && \
-cd onig-6.9.5 && \
-./configure --prefix=/usr && \
-make && make install && \
-rm -rf onig-6.9.5* && \ 
 #
 # make temp folder
 mkdir -p /home/nginx-php && \
+# 
+# install oniguruma
+curl -Lk https://github.com/kkos/oniguruma/releases/download/v6.9.5_rev1/onig-6.9.5-rev1.tar.gz | gunzip | tar x -C /home/nginx-php && \
+cd /home/nginx-php/onig-6.9.5 && \
+./configure --prefix=/usr && \
+make && make install && \
 # install nginx
 curl -Lk https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
 #curl -Lk http://172.17.0.1/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
