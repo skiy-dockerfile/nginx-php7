@@ -124,13 +124,13 @@ ln -s /usr/local/php/bin/* /bin/ && \
 rm -rf /home/nginx-php && \
 #
 # clean os
-# RUN yum remove -y gcc \
-# gcc-c++ \
-# autoconf \
-# automake \
-# libtool \
-# make \
-# cmake && \
+RUN yum remove -y gcc \
+gcc-c++ \
+autoconf \
+automake \
+libtool \
+make \
+cmake && \
 yum clean all && \
 rm -rf /tmp/* /var/cache/{yum,ldconfig} /etc/my.cnf{,.d} && \
 mkdir -p --mode=0755 /var/cache/{yum,ldconfig} && \
