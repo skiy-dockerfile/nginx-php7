@@ -40,8 +40,15 @@ libpng-devel \
 libjpeg-devel \
 freetype-devel \
 libmcrypt-devel \
-oniguruma oniguruma-devel \
+#oniguruma oniguruma-devel \
 openssh-server && \
+# 
+# install oniguruma
+curl -SL -O https://github.com/kkos/oniguruma/releases/download/v6.9.5_rev1/onig-6.9.5-rev1.tar.gz && \
+tar -zxf onig-6.9.5-rev1.tar.gz && \
+cd onig-6.9.5 && \
+./autogen.sh && ./configure --prefix=/usr && \
+make && make install && \
 #
 # make temp folder
 mkdir -p /home/nginx-php && \
