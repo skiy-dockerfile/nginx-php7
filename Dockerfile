@@ -1,7 +1,7 @@
-FROM centos:7
+FROM centos:8
 MAINTAINER Skiychan <dev@skiy.net>
 
-ENV NGINX_VERSION 1.19.1
+ENV NGINX_VERSION 1.19.2
 ENV PHP_VERSION 7.4.9
 
 ENV PRO_SERVER_PATH=/data/server
