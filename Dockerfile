@@ -121,8 +121,8 @@ cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/ww
 ln -s /usr/local/php/bin/* /bin/ && \
 #
 # remove temp folder
-rm -rf /home/nginx-php && \
-#
+rm -rf /home/nginx-php
+
 # clean os
 RUN yum remove -y gcc \
 gcc-c++ \
@@ -132,6 +132,7 @@ libtool \
 make \
 cmake && \
 yum clean all && \
+# remove cache
 rm -rf /tmp/* /var/cache/{yum,ldconfig} /etc/my.cnf{,.d} && \
 mkdir -p --mode=0755 /var/cache/{yum,ldconfig} && \
 find /var/log -type f -delete
