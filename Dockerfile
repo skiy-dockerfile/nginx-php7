@@ -10,6 +10,9 @@ ENV NGX_LOG_ROOT=/data/wwwlogs
 ENV PHP_EXTENSION_SH_PATH=/data/server/php/extension
 ENV PHP_EXTENSION_INI_PATH=/data/server/php/ini
 
+## mkdir folders
+RUN mkdir -p /data/{wwwroot,wwwlogs,server/php/ini,server/php/extension,}
+
 RUN yum install -y epel-release && \
 #
 ## install libraries
@@ -37,13 +40,10 @@ libjpeg-devel \
 freetype-devel \
 libmcrypt-devel \
 #oniguruma \
-openssh-server
-
-## mkdir folders
-RUN mkdir -p /data/{wwwroot,wwwlogs,server/php/ini,server/php/extension,}
-
+openssh-server && \
+#
 # make temp folder
-RUN mkdir -p /home/nginx-php && cd $_ && \
+mkdir -p /home/nginx-php && cd $_ && \
 # 
 # install nginx
 curl -Lk https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
@@ -123,10 +123,10 @@ cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/ww
 ln -s /usr/local/php/bin/* /bin/ && \
 #
 # remove temp folder
-rm -rf /home/nginx-php
-
+rm -rf /home/nginx-php && \
+#
 # clean os
-RUN yum remove -y gcc \
+yum remove -y gcc \
 gcc-c++ \
 autoconf \
 automake \
@@ -134,23 +134,24 @@ libtool \
 make \
 cmake && \
 yum clean all && \
+yum remove epel-release && \
 # remove cache
 rm -rf /tmp/* /var/cache/{yum,ldconfig} /etc/my.cnf{,.d} && \
 mkdir -p --mode=0755 /var/cache/{yum,ldconfig} && \
 find /var/log -type f -delete
+
+RUN chown -R www:www ${NGX_WWW_ROOT} && \
+chmod +x /entrypoint.sh
 
 VOLUME ["/data/wwwroot", "/data/wwwlogs", "/data/server/php/ini", "/data/server/php/extension", "/data/server/nginx"]
 
 # NGINX
 ADD nginx.conf /usr/local/nginx/conf/
 ADD vhost /usr/local/nginx/conf/vhost
-
 ADD www ${NGX_WWW_ROOT}
 
 # Start
 ADD entrypoint.sh /
-RUN chown -R www:www ${NGX_WWW_ROOT} && \
-chmod +x /entrypoint.sh
 
 # Set port
 EXPOSE 80 443
