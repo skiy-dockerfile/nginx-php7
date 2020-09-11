@@ -1,5 +1,5 @@
 FROM centos:8
-MAINTAINER Skiychan <dev@skiy.net>
+LABEL maintainer="Skiy Chan <skiychan@outlook.com>"
 
 ENV NGINX_VERSION 1.19.2
 ENV PHP_VERSION 7.4.10
@@ -10,13 +10,10 @@ ENV NGX_LOG_ROOT=/data/wwwlogs
 ENV PHP_EXTENSION_SH_PATH=/data/server/php/extension
 ENV PHP_EXTENSION_INI_PATH=/data/server/php/ini
 
-## mkdir folders
-RUN mkdir -p /data/{wwwroot,wwwlogs,server/php/ini,server/php/extension,}
-
-RUN yum install -y epel-release
-
+RUN yum install -y epel-release && \
+#
 ## install libraries
-RUN set -x && \
+set -x && \
 yum install -y gcc \
 gcc-c++ \
 autoconf \
@@ -40,19 +37,14 @@ libjpeg-devel \
 freetype-devel \
 libmcrypt-devel \
 #oniguruma \
-openssh-server && \
-#
+openssh-server
+
 # make temp folder
-mkdir -p /home/nginx-php && \
+RUN mkdir -p /home/nginx-php && cd $_ && \
 # 
-# install oniguruma
-curl -Lk https://github.com/kkos/oniguruma/releases/download/v6.9.5_rev1/onig-6.9.5-rev1.tar.gz | gunzip | tar x -C /home/nginx-php && \
-cd /home/nginx-php/onig-6.9.5 && \
-./configure --prefix=/usr && \
-make && make install && \
 # install nginx
-curl -Lk https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
-#curl -Lk http://172.17.0.1/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+#curl -Lk https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+curl -Lk http://172.17.0.1/nginx-$NGINX_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
 cd /home/nginx-php/nginx-$NGINX_VERSION && \
 ./configure --prefix=/usr/local/nginx \
 --user=www --group=www \
@@ -69,11 +61,18 @@ make && make install && \
 # add user
 useradd -r -s /sbin/nologin -d ${NGX_WWW_ROOT} -m -k no www && \
 # ln nginx
-cd ${PRO_SERVER_PATH} && ln -s /usr/local/nginx/conf nginx && \
+ln -s /usr/local/nginx/conf ${PRO_SERVER_PATH}/nginx && \
+#
+# install oniguruma php ext
+#curl -Lk https://github.com/kkos/oniguruma/releases/download/v6.9.5_rev1/onig-6.9.5-rev1.tar.gz | gunzip | tar x -C /home/nginx-php && \
+curl -Lk http://172.17.0.1/onig-6.9.5-rev1.tar.gz | gunzip | tar x -C /home/nginx-php && \
+cd /home/nginx-php/onig-6.9.5 && \
+./configure --prefix=/usr && \
+make && make install && \
 #
 # install php
-curl -Lk https://php.net/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
-#curl -Lk http://172.17.0.1/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+#curl -Lk https://php.net/distributions/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
+curl -Lk http://172.17.0.1/php-$PHP_VERSION.tar.gz | gunzip | tar x -C /home/nginx-php && \
 cd /home/nginx-php/php-$PHP_VERSION && \  
 ./configure --prefix=/usr/local/php \
 --with-config-file-path=/usr/local/php/etc \
@@ -136,6 +135,9 @@ yum clean all && \
 rm -rf /tmp/* /var/cache/{yum,ldconfig} /etc/my.cnf{,.d} && \
 mkdir -p --mode=0755 /var/cache/{yum,ldconfig} && \
 find /var/log -type f -delete
+
+## mkdir folders
+RUN mkdir -p /data/{wwwroot,wwwlogs,server/php/ini,server/php/extension,}
 
 VOLUME ["/data/wwwroot", "/data/wwwlogs", "/data/server/php/ini", "/data/server/php/extension", "/data/server/nginx"]
 
