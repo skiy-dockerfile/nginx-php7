@@ -140,9 +140,6 @@ rm -rf /tmp/* /var/cache/{yum,ldconfig} /etc/my.cnf{,.d} && \
 mkdir -p --mode=0755 /var/cache/{yum,ldconfig} && \
 find /var/log -type f -delete
 
-RUN chown -R www:www ${NGX_WWW_ROOT} && \
-chmod +x /entrypoint.sh
-
 VOLUME ["/data/wwwroot", "/data/wwwlogs", "/data/server/php/ini", "/data/server/php/extension", "/data/server/nginx"]
 
 # NGINX
@@ -152,6 +149,9 @@ ADD www ${NGX_WWW_ROOT}
 
 # Start
 ADD entrypoint.sh /
+
+RUN chown -R www:www ${NGX_WWW_ROOT} && \
+chmod +x /entrypoint.sh
 
 # Set port
 EXPOSE 80 443
