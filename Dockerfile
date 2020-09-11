@@ -39,6 +39,9 @@ libmcrypt-devel \
 #oniguruma \
 openssh-server
 
+## mkdir folders
+RUN mkdir -p /data/{wwwroot,wwwlogs,server/php/ini,server/php/extension,}
+
 # make temp folder
 RUN mkdir -p /home/nginx-php && cd $_ && \
 # 
@@ -135,9 +138,6 @@ yum clean all && \
 rm -rf /tmp/* /var/cache/{yum,ldconfig} /etc/my.cnf{,.d} && \
 mkdir -p --mode=0755 /var/cache/{yum,ldconfig} && \
 find /var/log -type f -delete
-
-## mkdir folders
-RUN mkdir -p /data/{wwwroot,wwwlogs,server/php/ini,server/php/extension,}
 
 VOLUME ["/data/wwwroot", "/data/wwwlogs", "/data/server/php/ini", "/data/server/php/extension", "/data/server/nginx"]
 
