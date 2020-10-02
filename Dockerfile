@@ -1,8 +1,8 @@
 FROM centos:8
-LABEL maintainer="Skiy Chan <skiychan@outlook.com>"
+LABEL maintainer="Skiy Chan <dev@skiy.net>"
 
-ENV NGINX_VERSION 1.19.2
-ENV PHP_VERSION 7.4.10
+ENV NGINX_VERSION 1.19.3
+ENV PHP_VERSION 7.4.11
 
 ENV PRO_SERVER_PATH=/data/server
 ENV NGX_WWW_ROOT=/data/wwwroot
@@ -13,11 +13,11 @@ ENV PHP_EXTENSION_INI_PATH=/data/server/php/ini
 ## mkdir folders
 RUN mkdir -p /data/{wwwroot,wwwlogs,server/php/ini,server/php/extension,}
 
-RUN yum install -y epel-release && \
+RUN dnf install -y epel-release && \
 #
 ## install libraries
 set -x && \
-yum install -y gcc \
+dnf install -y gcc \
 gcc-c++ \
 autoconf \
 automake \
@@ -126,15 +126,15 @@ ln -s /usr/local/php/bin/* /bin/ && \
 rm -rf /home/nginx-php && \
 #
 # clean os
-yum remove -y gcc \
+dnf remove -y gcc \
 gcc-c++ \
 autoconf \
 automake \
 libtool \
 make \
 cmake && \
-yum clean all && \
-# yum remove epel-release -y && \
+dnf clean all && \
+# dnf remove epel-release -y && \
 # remove cache
 rm -rf /tmp/* /var/cache/{yum,ldconfig} /etc/my.cnf{,.d} && \
 mkdir -p --mode=0755 /var/cache/{yum,ldconfig} && \
