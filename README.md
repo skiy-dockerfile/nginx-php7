@@ -3,8 +3,8 @@
 English | [简体中文](./README_CN.md)
 
 # Last Version
-NGINX: **1.19.4**   
-PHP:   **7.4.12**
+NGINX: **1.19.5**   
+PHP:   **7.4.13**
 
 # Docker Hub   
 **Nginx-PHP7:** [https://hub.docker.com/r/skiychan/nginx-php7](https://hub.docker.com/r/skiychan/nginx-php7)   
