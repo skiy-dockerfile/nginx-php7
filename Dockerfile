@@ -1,7 +1,7 @@
 FROM centos:8
 LABEL maintainer="Skiy Chan <dev@skiy.net>"
 
-ENV NGINX_VERSION 1.19.9
+ENV NGINX_VERSION 1.20.0
 ENV PHP_VERSION 7.4.16
 
 ENV PRO_SERVER_PATH=/data/server
