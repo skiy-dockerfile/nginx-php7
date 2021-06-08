@@ -2,7 +2,7 @@ FROM centos:8
 LABEL maintainer="Skiy Chan <skiychan@outlook.com>"
 
 ENV NGINX_VERSION 1.20.1
-ENV PHP_VERSION 7.4.19
+ENV PHP_VERSION 7.4.20
 
 ENV PRO_SERVER_PATH=/data/server
 ENV NGX_WWW_ROOT=/data/wwwroot
