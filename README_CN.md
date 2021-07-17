@@ -3,8 +3,8 @@
 [English](./README.md) | 简体中文
 
 # 最新版本
-NGINX: **1.20.1**   
-PHP:   **7.4.20**
+NGINX: **1.21.1**   
+PHP:   **7.4.21**
 
 
 # Docker Hub   
