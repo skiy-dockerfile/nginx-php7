@@ -1,0 +1,31 @@
+version: '3'
+services:
+  p38080:
+    image: skiychan/nginx-php7:latest
+    ports:
+      - "38080:80"
+  p38081:
+    image: skiychan/nginx-php7:latest
+    volumes:
+      - ./wwwroot:/data/wwwroot
+    ports:
+      - "38081:80"
+  p38082:
+    image: skiychan/nginx-php7:latest
+    volumes:
+      - ./wwwroot:/data/wwwroot
+      - ./wwwlogs:/data/wwwlogs
+      - ./vhost:/data/server/nginx/vhost
+      - ./ssl:/data/server/nginx/ssl
+    ports:
+      - "38082:80"
+      - "38083:443"
+  p38084:
+    image: skiychan/nginx-php7:latest
+    volumes:
+      - ./wwwroot:/data/wwwroot
+      - ./wwwlogs:/data/wwwlogs
+      - ./ini:/data/server/php/ini
+      - ./extension:/data/server/php/extension
+    ports:
+      - "38084:80"
