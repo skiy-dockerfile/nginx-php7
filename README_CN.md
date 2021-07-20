@@ -30,6 +30,16 @@ docker pull skiychan/nginx-php7:latest
 docker pull skiychan/nginx-php7:dev
 ```
 
+# docker-compose
+```yaml
+version: '3'
+services:
+  nginx-php7:
+    image: skiychan/nginx-php7:latest
+    ports:
+      - "38080:80"
+```
+
 # 启动
 使用镜像启动基础容器
 ```sh
@@ -73,8 +83,8 @@ extension=swoole.so
 
 **/your_php_extension_file/extension.sh** 文件的内容为:   
 ```
-curl -Lk https://github.com/swoole/swoole-src/archive/v4.4.14.tar.gz | gunzip | tar x -C /home/extension && \
-cd /home/extension/swoole-src-4.4.14 && \
+curl -Lk https://github.com/swoole/swoole-src/archive/v4.7.0.tar.gz | gunzip | tar x -C /home/extension && \
+cd /home/extension/swoole-src-4.7.0 && \
 /usr/local/php/bin/phpize && \
 ./configure --with-php-config=/usr/local/php/bin/php-config && \
 make && make install
@@ -83,7 +93,7 @@ make && make install
 </details>
 
 # License
-本项目遵循 [MIT 开源协议](https://github.com/skiy/nginx-php7/blob/master/LICENSE).
+本项目遵循 [MIT 开源协议](https://github.com/skiy/nginx-php7/blob/main/LICENSE).
 
 # 感谢
 <a href="https://www.jetbrains.com/?from=nginx-php7" target="_blank"><img src="https://camo.githubusercontent.com/d4143cfccf26532a30c578a2689bafcc5aa41572/68747470733a2f2f676f6672616d652e6f72672f696d616765732f6a6574627261696e732e706e67" width="100" alt="JetBrains"/></a>
